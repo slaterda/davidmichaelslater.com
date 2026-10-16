@@ -22,3 +22,5 @@
 
 @media(min-width:561px) and (max-width:1000px){.news-with-image{grid-template-columns:88px minmax(0,1fr);gap:17px}.news-image{height:130px;padding:8px}}
 @media(max-width:380px){.news-with-image{grid-template-columns:88px minmax(0,1fr);gap:16px}.news-image{height:130px;padding:8px}}
+
+.resource.resource-with-cover{display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap}.resource-audiobook-cover{display:block;width:140px;max-width:100%;height:auto;flex:none}.resource-with-cover .resource-copy{flex:1 1 220px;min-width:0}.prose .edition-announcement{background:var(--wash);border-left:3px solid var(--accent);padding:22px 24px;margin:30px 0}.prose .edition-announcement h2{font-size:25px;margin:0 0 12px}.prose .edition-announcement p{margin:0}
