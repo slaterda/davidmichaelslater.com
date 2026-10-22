@@ -1,0 +1,22 @@
+.appearances-section{padding:42px 0 58px;border-top:1px solid var(--line);scroll-margin-top:25px}
+.appearances-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 28px}
+.appearance-card{min-width:0;scroll-margin-top:30px}
+.appearance-player{aspect-ratio:16/9;background:#171918;position:relative;overflow:hidden}
+.appearance-player iframe{display:block;width:100%;height:100%;border:0}
+.video-start{display:block;position:relative;width:100%;height:100%;border:0;padding:0;background:#171918;color:#fff;cursor:pointer;text-align:left;font:inherit}
+.video-start>img{display:block;width:100%;height:100%;object-fit:cover;opacity:.86;transition:opacity .15s}
+.video-start:hover>img{opacity:1}.video-start:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#171918dd;box-shadow:0 1px 16px #0004}
+.video-play svg{margin-left:4px}.video-action{position:absolute;left:16px;bottom:14px;padding:7px 11px;background:#171918e8;color:#fff;font-size:12px;line-height:1.3}
+.video-link-preview>img{object-fit:contain;background:var(--wash);opacity:1}
+.appearance-copy{padding-top:21px}.appearance-copy h3{font-size:24px;line-height:1.2;margin:10px 0 0;letter-spacing:-.025em}
+.appearance-copy p{font-size:15px;line-height:1.65;color:var(--muted);margin:12px 0 16px;max-width:680px}
+.appearance-copy .video-meta{font-size:12px;margin:10px 0 0}.appearance-copy .text-link{font-size:12px}
+.video-index-intro{font-size:15px;line-height:1.6;color:var(--muted)}
+.video-index-card{display:grid;grid-template-columns:128px minmax(0,1fr);align-items:start;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+.video-index-card>img{width:128px;height:82px;object-fit:cover;background:var(--wash)}
+.video-index-card .eyebrow{display:block;font-size:9px;line-height:1.5;margin-bottom:8px}.video-index-card strong{display:block;font-size:16px;line-height:1.35}
+.video-index-book{display:block;font-size:12px;line-height:1.5;color:var(--muted);margin-top:8px}.video-index-card:hover strong{color:var(--accent)}
+.other-interviews-title{margin-top:40px!important}
+@media(max-width:680px){.appearances-grid{grid-template-columns:1fr;gap:35px}.appearances-section{padding:30px 0 42px}.appearance-copy h3{font-size:23px}.video-index-card{grid-template-columns:100px minmax(0,1fr);gap:14px}.video-index-card>img{width:100px;height:70px}}
+@media(prefers-reduced-motion:reduce){.video-start>img{transition:none}}
