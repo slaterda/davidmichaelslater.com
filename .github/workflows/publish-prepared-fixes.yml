@@ -32,7 +32,7 @@ jobs:
           origin = 'https://david-michael-slater-preview.bubbly-harp-9258.chatgpt.site/'
           tree = []
           for path, expected in files.items():
-              with urllib.request.urlopen(origin + path, timeout=60) as r:
+              with urllib.request.urlopen(urllib.request.Request(origin + path, headers={'User-Agent': 'Mozilla/5.0'}), timeout=60) as r:
                   content = r.read()
               if hashlib.sha256(content).hexdigest() != expected:
                   raise RuntimeError('Content verification failed: ' + path)
