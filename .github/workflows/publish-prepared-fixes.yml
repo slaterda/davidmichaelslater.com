@@ -1,0 +1,48 @@
+name: Publish prepared author fixes
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-prepared-fixes.yml']
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify prepared files and prepare publication commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PYTHON'
+          import base64, hashlib, json, os, urllib.request
+          repo = os.environ['GITHUB_REPOSITORY']
+          parent = os.environ['GITHUB_SHA']
+          api_root = 'https://api.github.com/repos/' + repo
+          
+          def api(path, payload=None):
+              headers = {'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', 'User-Agent': 'author-site-publisher'}
+              data = json.dumps(payload).encode() if payload is not None else None
+              req = urllib.request.Request(api_root + path, data=data, headers=headers)
+              with urllib.request.urlopen(req, timeout=60) as r:
+                  return json.load(r)
+          
+          files = {'assets/img/4be900cf4188403c494f.png': 'baa154203b0c25d30ba067b03da720f3a81fed9586eaf1f2971e4b2ff547679d', 'assets/press/David_Michael_Slater_Media_Materials.zip': '0c975060ebb581f2fb4b42478a48be4b4125d179391892d91e4ff9d4974d8e3d', 'press-materials/index.html': '4668bc1ad5ec923eb63b1395df29216d7259ea959b297f91b9c7e124821fbeed'}
+          origin = 'https://david-michael-slater-preview.bubbly-harp-9258.chatgpt.site/'
+          tree = []
+          for path, expected in files.items():
+              with urllib.request.urlopen(origin + path, timeout=60) as r:
+                  content = r.read()
+              if hashlib.sha256(content).hexdigest() != expected:
+                  raise RuntimeError('Content verification failed: ' + path)
+              blob = api('/git/blobs', {'content': base64.b64encode(content).decode(), 'encoding': 'base64'})
+              tree.append({'path': path, 'mode': '100644', 'type': 'blob', 'sha': blob['sha']})
+          tree.append({'path': '.github/workflows/publish-prepared-fixes.yml', 'mode': '100644', 'type': 'blob', 'sha': None})
+          base = api('/git/commits/' + parent)['tree']['sha']
+          new_tree = api('/git/trees', {'base_tree': base, 'tree': tree})
+          commit = api('/git/commits', {'message': 'Serve press downloads on author domain and remove image provider metadata', 'tree': new_tree['sha'], 'parents': [parent]})
+          print('PREPARED_AUTHOR_COMMIT=' + commit['sha'])
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
+              f.write('Verified publication commit: `' + commit['sha'] + '`\n')
+          PYTHON
