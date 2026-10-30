@@ -14,3 +14,6 @@
 @media(max-width:1050px){.critique-art-stage .critique-hero-character img{height:205px}.critique-art-stage{gap:9px;padding-inline:10px}.critique-hero-character figcaption strong{font-size:11px}.critique-art .critique-hero-character figcaption{font-size:10px}}
 @media(max-width:800px){.critique-art-stage .critique-hero-character img{height:230px}.critique-step-art figcaption{min-height:52px}}
 @media(max-width:560px){.critique-art-stage{gap:8px;padding:14px 9px}.critique-art-stage .critique-hero-character img{height:170px}.critique-hero-character figcaption strong{font-size:10.5px;min-height:3.4em}.critique-art .critique-hero-character figcaption{font-size:10px;padding-top:8px}.critique-closing{margin-bottom:30px}}
+
+/* Process artwork from Cheese Louise! and Hanukkah Harvie vs. Santa Claus. */
+.critique-steps li:nth-child(2) .critique-step-art>div{background:#fff}.critique-steps li:nth-child(3) .critique-step-art>div{background:#f8f3e7}
