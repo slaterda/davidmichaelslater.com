@@ -6,6 +6,10 @@
   const submit = form.querySelector('[type="submit"]');
   const buttonText = submit.innerHTML;
   let sending = false;
+  const inquirySubject = new URL(window.location.href).searchParams.get('subject');
+  if (inquirySubject === 'Picture Book Critique') {
+    form.elements.namedItem('subject').value = inquirySubject;
+  }
 
   if (new URL(window.location.href).searchParams.get('message') === 'sent') {
     form.reset();
